@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title> Notes </ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="addNote()">
         <ion-icon slot="icon-only" name="clipboard"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,8 +11,14 @@
 
 <ion-content>
   <ion-list>
-    <ion-item button detail>
-      <ion-label> Title goes here </ion-label>
+    <ion-item
+      button
+      detail
+      *ngFor="let note of notesService.notes"
+      [routerLink]="'/notes/' + note.id"
+      routerDirection="forward"
+    >
+      <ion-label>{{ note.title }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
