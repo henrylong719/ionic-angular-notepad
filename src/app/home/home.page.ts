@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor() {}
-
+  constructor(
+    // AlertController will allow use to create alert component
+    private alertCtrl: AlertController,
+    private navCtrl: NavController
+  ) {}
 }
