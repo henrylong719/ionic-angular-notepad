@@ -47,6 +47,10 @@ export class DetailPage implements OnInit {
 
   noteChanged() {
     // this.noteService.save(this.note);
+
+    console.log(this.note.content);
+
+    this.noteService.saveNoteContent(this.note);
   }
 
   deleteNote() {

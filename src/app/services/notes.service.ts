@@ -108,4 +108,22 @@ export class NotesService {
       )
       .subscribe();
   }
+
+  saveNoteContent(note) {
+    this.notes
+      .pipe(
+        take(1),
+
+        tap((notes) => {
+          notes.map((nt) => {
+            if (nt.id === note.id) {
+              nt.content = note.content;
+            }
+          });
+
+          this.save(notes);
+        })
+      )
+      .subscribe();
+  }
 }
