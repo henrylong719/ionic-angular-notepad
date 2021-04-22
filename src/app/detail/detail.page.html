@@ -15,7 +15,7 @@
 
 <ion-content class="ion-padding">
   <ion-textarea
-    (input)="noteChanged()"
+    (keyup)="noteChanged()"
     [(ngModel)]="note.content"
     placeholder="...something on your mind?"
   ></ion-textarea>
