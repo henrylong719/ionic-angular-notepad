@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { Note } from '../model/note.model';
 import { NotesService } from '../services/notes.service';
 
 @Component({
@@ -8,14 +10,20 @@ import { NotesService } from '../services/notes.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  noteSub: Subscription;
+  public notes: Note[];
+
   constructor(
     public notesService: NotesService,
-    private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private alertCtrl: AlertController
   ) {}
 
-  ngOnInit() {
-    this.notesService.load();
+  async ngOnInit() {
+    await this.notesService.load();
+
+    this.noteSub = this.notesService.notes.subscribe((notes) => {
+      this.notes = notes;
+    });
   }
 
   addNote() {

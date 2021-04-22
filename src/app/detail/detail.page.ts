@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Note } from '../interfaces/note';
+import { Note } from '../model/note.model';
+
 import { NotesService } from '../services/notes.service';
 
 @Component({
@@ -32,16 +33,20 @@ export class DetailPage implements OnInit {
     });
 
     if (this.noteService.loaded) {
-      this.note = this.noteService.getNote(noteId);
+      this.noteService.getNote(noteId).subscribe((note) => {
+        this.note = note;
+      });
     } else {
       this.noteService.load().then(() => {
-        this.note = this.noteService.getNote(noteId);
+        this.noteService.getNote(noteId).subscribe((note) => {
+          this.note = note;
+        });
       });
     }
   }
 
   noteChanged() {
-    this.noteService.save();
+    // this.noteService.save(this.note);
   }
 
   deleteNote() {
